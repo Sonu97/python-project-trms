@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <title>Add Employee</title>
+</head>
+<body>
+<style>
+body {
+  background-color: rgba(101, 60, 60, 0.3);
+}
+label {
+        display: inline-block;
+        width: 150px;
+        text-align: left;
+      }
+button{
+       display: inline-block;
+        width: 150px;
+        text-align: centre;
+      }
+
+</style>
+<table>
+    <tr>
+    <h3>Register Employee</h3>
+
+    <td class="header"></td><label for="empidInput">Employee ID:  </label></td>
+    <input type =  "number" id="empidInput"><br>
+    </tr>
+
+    <tr>
+    <td class="header"></td><label for="passwordInput">Password:  </label></td>
+    <input type =   "password" id="passwordInput"><br>
+    </tr>
+
+    <label for="nameInput">Employee Name:</label>
+    <input type="text" id="nameInput"><br>
+
+
+    <label for="emailInput">Email:</label>
+    <input type="text" id="emailInput"><br>
+
+    <label for="supervisorempidInput">Supervisor ID:</label>
+    <input type="number" id="supervisorempidInput"><br>
+
+    <label for="isdeptheadInput">Dept Head:</label>
+    <input type="text" id="isdeptheadInput"><br>
+
+    <label for="isbencoInput">Benco:</label>
+    <input type="text" id="isbencoInput"><br>
+
+    <label for="isadminInput">Admin:</label>
+    <input type="text" id="isadminInput"><br>
+
+    <label for="deptidInput">Dept ID:</label>
+    <input type="number" id="deptidInput"><br>
+
+
+    <button onclick="regEmp()"><b>Add Employee</b></button>
+
+    <h3 class="name"> Event Type</h3>
+    <select class="option" name=eventtype">
+        <option disabled="disabled" selected="selected">--Choose Option</option>
+        <option> Courses</option>
+        <option> Seminars</option>
+        <option> Certification Prep</option>
+        <option> Certification</option>
+        <option> Technical Training</option>
+    </select>
+    <h3 class="name"> Event Start Date</h3>
+    <input type="date"/>
+    <h3 id="approvals"> Approvals</h3>
+    <label for="yes">Yes</label>
+    <input id="yes" type="radio" value="true" name="approvals" >
+    <label for="no">No</label>
+    <input id="no" name="approvals" value="Pending Approval">
+    <h3 class="name"> Approved By</h3>
+    <select> class="option" name="approvedby"
+        <option disabled="disabled" selected="selected">--Choose Option</option>
+        <option> Approved By</option>
+        <option> Supervisor</option>
+        <option> Department Head</option>
+        <option> Benco</option>
+        <label for="amount">Amount (between 0 and 1000):</label>
+        <input id="amount" max="1000" min="0" name="amount" type="number">
+
+    </select>
+
+
+ </table>
+</body>
+<script>
+
+    async function regEmp() {
+
+        console.log("Adding Employee..")
+
+        const empidVal = document.getElementById("empidInput").value
+        const emppasswordVal = document.getElementById("passwordInput").value
+        const empnameVal = document.getElementById("nameInput").value
+        const empemailVal = document.getElementById("emailInput").value
+        const supervisorempidVal = document.getElementById("supervisorempidInput").value
+        const isdeptheadVal = document.getElementById("isdeptheadInput").value
+        const isbencoVal= document.getElementById("isbencoInput").value
+        const isadminVal= document.getElementById("isadminInput").value
+        const deptidVal = document.getElementById("deptidInput").value
+
+        console.log(empidVal)
+        console.log(emppasswordVal)
+        console.log(empnameVal)
+        console.log(empemailVal)
+        console.log(supervisorempidVal)
+        console.log(isdeptheadVal)
+        console.log(isbencoVal)
+        console.log(isadminVal)
+        console.log(deptidVal)
+
+        const data = {
+            empId: empidVal,
+            empPassword: emppasswordVal,
+            empName: empnameVal,
+            empEmail: empemailVal,
+            supervisorEmpId: supervisorempidVal,
+            isDeptHead: isdeptheadVal,
+            isBenco: isbencoVal,
+            isAdmin: isadminVal,
+            deptId: deptidVal
+
+        }
+        
+        const url = "http://localhost:5000/employees"
+
+        const  httpResponse = await fetch (url,
+        {
+            method: "POST",
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const body = await httpResponse.json();
+
+        console.log(body);
+        if (body)
+        {
+            alert("Employee added Successfully");
+        } else
+        {
+            alert("adding failed.");
+        }
+
+
+    }
+
+
+</script>
+</html>

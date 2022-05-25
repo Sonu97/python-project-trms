@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<head>
+
+    <title>Register Page</title>
+
+    <style>
+        .header {
+            text-align: right
+        }
+
+        #myTable th,
+        #myTable td {
+            border: 1px solid black;
+            width: 33%;
+        }
+    </style>
+</head>
+
+<body>
+
+<form action="/action_page.php">
+    <div class="container">
+        <h1>Register Employee</h1>
+        <p>Please fill in this form to create an employee record.</p>
+        <hr>
+
+    </div>
+</form>
+
+
+<table>
+        <tr>
+            <td class="header"><label for="usernameInput"><b>Username:</b></label></td>
+            <td><input type="text" placeholder="Enter Username" id="usernameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput"><b>Password:</b></label></td>
+            <td><input type="password" placeholder="Enter Password" id="passwordInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="emailInput"><b>Email:</b></label></td>
+            <td><input type="email" placeholder="Enter Email" id="emailInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="empidInput"><b>Employee ID:</b></label></td>
+            <td><input type="text" placeholder="Enter Employee Id" id="empidInput"  /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onclick="registerUser()">Register</button></td>
+        </tr>
+    </table>
+
+<script>
+
+    let registerUser = function () {
+
+        let usernameVal = document.getElementById("usernameInput").value
+        let passwordVal = document.getElementById("passwordInput").value
+        let emailVal = document.getElementById("emailInput").value
+        let empidVal = document.getElementById("empidInput").value
+
+        console.log(usernameVal)
+        console.log(passwordVal)
+        console.log(emailVal)
+        console.log(empidVal)
+
+
+
+        let user = {
+            username: usernameVal,
+            password: passwordVal,
+            email: emailVal,
+            empid: empidVal
+        }
+
+        console.log(user)
+
+        let userJSON = JSON.stringify(user)
+        console.log(userJSON)
+        let pretendResponse = JSON.parse(userJSON)
+
+        console.log(pretendResponse)
+
+        if (pretendResponse) {
+            alert("Employee Successfully Created!")
+        }
+
+    }
+</script>
+<!--<script>-->
+<!--    function loadEmployees() {-->
+<!--        let employees = [-->
+<!--           { empid: 1, empname: " Ram Kumar", empemail: 'ram.kumar@gmail.com'}-->
+<!--          {  empid: 2, empname: " Archie Rodriquez" empemail: 'arch@gmail.com'}-->
+<!--        ]-->
+<!--        let tableElement = document.getElementById("myTBody")-->
+<!--        tableElement.innerHTML = "";-->
+
+<!--        employees.forEach(employee => {-->
+<!--                let employeeRow = document.createElement("tr")-->
+<!--            tableElement.appendChild(employeeRow)-->
+
+<!--            for (prop in employee) {-->
+<!--                let propData = document.createElement("td")-->
+<!--                propData.innerHTML = employee[prop]-->
+<!--                employeeRow.appendChild(propData);-->
+<!--            }-->
+
+<!--        })-->
+
+<!--    }-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
